@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model BooksViewModel
+
+    <h6>Browse Books</h6>
+    <div class="d-grid gap-1">
+        @foreach (Book b in Model.Books)
+        {
+            <partial name="BookSummaryPV" model="b" />
+        }
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div page-link="@Model.PageInfo" page-action="Index" page-class="btn"
+         page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-classes-enabled="true"
+         class="btn-group pull-right m-1"></div>

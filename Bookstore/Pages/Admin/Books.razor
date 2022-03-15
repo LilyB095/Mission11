@@ -1,0 +1,96 @@
+﻿@page "/admin/books"
+@page "/admin"
+
+@inherits OwningComponentBase<IBookstoreRepository>
+
+<h3>Books</h3>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Classification</th>
+            <th>Category</th>
+            <th>Page Count</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <!--If there are books, pull their data-->
+        @if (BookData?.Count() > 0)
+        {
+            //list books
+            @foreach (Book b in BookData)
+            {
+        <tr>
+            <td>@b.BookId</td>
+            <td>@b.Title</td>
+            <td>@b.Author</td>
+            <td>@b.Publisher</td>
+            <td>@b.Isbn</td>
+            <td>@b.Classification</td>
+            <td>@b.Category</td>
+            <td>@b.PageCount</td>
+            <td>@b.Price</td>
+
+
+            <td>
+                <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(b.BookId)">Details</NavLink>
+            </td>
+            <td>
+                <NavLink class="btn btn-warning btn-sm" href="@GetDetailsUrl(b.BookId)">Edit</NavLink>
+            </td>
+            <td>
+                <button class="btn btn-danger btn-sm" @onclick="@(x=> RemoveBook(b))" >Delete</button>
+            </td>
+
+        </tr>
+
+
+            }
+        }
+        else
+        {
+            <tr colspan="5" class="text-center">No Books</tr>
+        }
+
+
+        </tbody>
+
+    </table>
+
+<NavLink class="btn btn-primary" href="/admin/books/create">Create</NavLink>
+
+@code {
+
+    public IBookstoreRepository repo => Service;
+
+    public IEnumerable<Book> BookData { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        BookData = await repo.Books.ToListAsync();
+    }
+
+
+    public string GetDetailsUrl(long id) => $"/admin/books/details/{id}";
+    public string GetDetailsUrls(long id) => $"/admin/books/edit/{id}";
+
+    public async Task RemoveBook (Book b)
+    {
+        repo.DeleteBook(b);
+        await UpdateData();
+    }
+
+}

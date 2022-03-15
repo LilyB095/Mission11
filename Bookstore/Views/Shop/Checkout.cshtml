@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Checkout
+    
+
+
+<h1>Bookstore Checkout</h1>
+<p>Please enter your details, and we'll get your order shipped to you!</p>
+<br />
+<div asp-validation-summary="All" class="text-danger"></div>
+<br />
+
+<form method="post" asp-controller="Shop" asp-action="Checkout">
+
+    <h4>Contact</h4>
+
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone">Phone Number:</label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <br />
+
+    <h4>Address</h4>
+
+    <div class="form-group">
+        <label asp-for="Address1">Address Line 1:</label>
+        <input asp-for="Address1" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address2">Address Line 2:</label>
+        <input asp-for="Address2" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="City">City:</label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="State">State:</label>
+        <input asp-for="State" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Zip">Zip Code:</label>
+        <input asp-for="Zip" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Country">Country:</label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+
+    <h4>For Fun :)</h4>
+    <br />
+    <div class="form-group">
+        <label asp-for="RandomFact">What is a random or fun fact that you know?</label>
+        <input asp-for="RandomFact" class="form-control" />
+    </div>
+
+    <!--Submit Form-->
+    <div class="float-end">
+        <input class="btn btn-primary" type="submit" value="Submit Order" />
+    </div>
+
+</form>
